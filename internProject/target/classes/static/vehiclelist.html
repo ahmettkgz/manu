@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vehicles List</title>
+    <script>
+        // Function to fetch and display vehicles
+        async function fetchVehicles() {
+            const response = await fetch('/vehicles');
+            const vehicles = await response.json();
+
+            const tableBody = document.getElementById('vehicles-table-body');
+            tableBody.innerHTML = ''; // Clear previous data
+
+            vehicles.forEach(vehicle => {
+                const row = document.createElement('tr');
+
+                row.innerHTML = `
+                    <td>${vehicle.id}</td>
+                    <td>${vehicle.model}</td>
+                    <td>${vehicle.licensePlate}</td>
+                    <td>${vehicle.department}</td>
+                `;
+
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Fetch vehicles when the page loads
+        window.onload = function() {
+            fetchVehicles();
+        }
+    </script>
+</head>
+<body>
+
+<h1>List of Vehicles</h1>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Model</th>
+        <th>License Plate</th>
+        <th>Department</th>
+    </tr>
+    <tbody id="vehicles-table-body">
+        <!-- Vehicles data will be inserted here by JavaScript -->
+    </tbody>
+</table>
+
+</body>
+</html>
